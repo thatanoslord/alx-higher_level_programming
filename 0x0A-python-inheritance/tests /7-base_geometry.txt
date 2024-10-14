@@ -1,0 +1,87 @@
+importing Base Geometry
+    >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+	>>> bg = BaseGeometry()
+
+
+Testing integer validator for different values
+Method works fine if value is int and > 0
+
+Cases
+------
+
+- Happy Path
+
+    >>> bg.integer_validator('Test', 189)
+
+- Test area method
+    >>> bg.area()
+    Traceback (most recent call last):
+    Exception: area() is not implemented
+
+- Mismatching types
+
+    >>> bg.integer_validator('Test', 'test')
+    Traceback (most recent call last):
+    TypeError: Test must be an integer
+
+    >>> bg.integer_validator('Test', [1,2,3])
+    Traceback (most recent call last):
+    TypeError: Test must be an integer
+
+    >>> bg.integer_validator('Test', {1,2,3})
+    Traceback (most recent call last):
+    TypeError: Test must be an integer
+
+    >>> bg.integer_validator('Test', (1,2,3))
+    Traceback (most recent call last):
+    TypeError: Test must be an integer
+
+    >>> bg.integer_validator('Test', None)
+    Traceback (most recent call last):
+    TypeError: Test must be an integer
+
+    >>> bg.integer_validator('Test', {1:'hi', 2: 'hello'})
+    Traceback (most recent call last):
+    TypeError: Test must be an integer
+
+    >>> bg.integer_validator('Test', False)
+    Traceback (most recent call last):
+    TypeError: Test must be an integer
+
+- Negative values & 0 value
+    >>> bg.integer_validator('Test', -9)
+    Traceback (most recent call last):
+    ValueError: Test must be greater than 0
+    
+    >>> bg.integer_validator('Test', 0)
+    Traceback (most recent call last):
+    ValueError: Test must be greater than 0
+
+- float value
+    >>> bg.integer_validator('Test', 3.8)
+    Traceback (most recent call last):
+    TypeError: Test must be an integer
+
+- name of type not string
+	>>> bg.integer_validator([23, 4, 5], [5, 4])
+	Traceback (most recent call last):
+	TypeError: [23, 4, 5] must be an integer
+
+- none
+
+    >>> bg.integer_validator(None, [5,4])
+    Traceback (most recent call last):
+    TypeError: None must be an integer
+
+    >>> bg.integer_validator(None, 2)
+
+- missing arguments
+    >>> bg.integer_validator()
+    Traceback (most recent call last):
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+    
+	>>> bg.integer_validator("HI")
+	Traceback (most recent call last):
+	TypeError: integer_validator() missing 1 required positional argument: 'value'
+    
